@@ -14,17 +14,17 @@ export const AppContext = (props) => {
 
     useEffect(() => {
        // This will take a dependency array
-       fetchSelectedCategoryData(selectCategories)
-    }, [selectCategories]) // whenever the client selects a category it will kickstart this method and the respected api will be called to fetch the data for that particular category
+       fetchSelectedCategoryData(selectCategories);
+    }, [selectCategories]); // whenever the client selects a category it will kickstart this method and the respected api will be called to fetch the data for that particular category
     
     const fetchSelectedCategoryData = (query) => {
-         setLoading(true)
-         fetchDataFromApi(`search/?q=${query}`).then((res) => {
-            console.log(res)
-            //setSearchResults(res)
-            setLoading(false)
-         })   
-    }
+         setLoading(true);
+         fetchDataFromApi(`search/?q=${query}`).then(({ contents }) => {
+            console.log(contents);
+            setSearchResults(contents);
+            setLoading(false);
+         });   
+    };
     return (
         <Context.Provider 
         value = {{
